@@ -1,0 +1,49 @@
+modLoader = "javafml"
+loaderVersion = "[40,)"
+#issueTrackerURL = ""
+license = "MIT License"
+
+[[mods]]
+modId = "viving_computers"
+version = "${version}"
+displayName = "Viving Computers"
+authors = "TechTastic"
+description = '''
+Vivecraft x ComputerCraft Addon
+'''
+#logoFile = ""
+
+[[dependencies.viving_computers]]
+modId = "forge"
+mandatory = true
+versionRange = "[40,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.viving_computers]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18.2,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.viving_computers]]
+modId = "architectury"
+mandatory = true
+versionRange = "[4.11.91,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.viving_computers]]
+modId = "computercraft"
+mandatory = true
+versionRange = "[1.101.3,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.viving_computers]]
+modId = "vivecraft"
+mandatory = true
+versionRange = "[1.0.1,)"
+ordering = "AFTER"
+side = "SERVER"

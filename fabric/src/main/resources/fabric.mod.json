@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "viving_computers",
+  "version": "${version}",
+  "name": "Viving Computers",
+  "description": "Vivecraft x ComputerCraft Addon",
+  "authors": [
+    "TechTastic"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "MIT License",
+  "icon": "assets/viving_computers/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.techtastic.viving_computers.fabric.VivingComputersModFabric"
+    ],
+    "client": [
+      "io.github.techtastic.viving_computers.fabric.VivingComputersModClientFabric"
+    ]
+  },
+  "mixins": [
+    "viving_computers.mixins.json",
+    "viving_computers-common.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.18.2",
+    "architectury": ">=4.11.91",
+    "computercraft": ">=1.100.8",
+    "vivecraft": ">=1.0.1"
+  }
+}

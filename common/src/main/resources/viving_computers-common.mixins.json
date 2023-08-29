@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "io.github.techtastic.viving_computers.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "MixinLecternBlock"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
