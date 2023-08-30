@@ -2,6 +2,7 @@ package io.github.techtastic.viving_computers.integration.cc.peripherals;
 
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
+import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import io.github.techtastic.viving_computers.block.entity.VivecraftPlayerStandBE;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,6 +31,20 @@ public class VivecraftPlayerStandPeripheral implements IPeripheral {
     public boolean equals(IPeripheral iPeripheral) {
         return iPeripheral instanceof VivecraftPlayerStandPeripheral test &&
                 test.stand.equals(this.stand);
+    }
+
+    @Override
+    public void attach(IComputerAccess computer) {
+        IPeripheral.super.attach(computer);
+
+        this.stand.attachComputer(computer);
+    }
+
+    @Override
+    public void detach(IComputerAccess computer) {
+        IPeripheral.super.detach(computer);
+
+        this.stand.detachComputer(computer);
     }
 
     @LuaFunction
