@@ -4,6 +4,7 @@ import io.github.techtastic.viving_computers.block.VCBlockEntities;
 import io.github.techtastic.viving_computers.block.entity.VivecraftPlayerStandBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -26,6 +27,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import org.vivecraft.client.VRPlayersClient;
+import org.vivecraft.server.ServerVRPlayers;
 
 import java.util.Objects;
 
@@ -42,7 +45,7 @@ public class VivecraftPlayerStandBlock extends BaseEntityBlock {
         BlockEntity be = level.getBlockEntity(blockPos);
         boolean emptyHand = player.getItemInHand(interactionHand).isEmpty();
 
-        if (be instanceof VivecraftPlayerStandBE stand && emptyHand) {
+        if (be instanceof VivecraftPlayerStandBE stand && emptyHand && isPlayerInVR(level.isClientSide, player)) {
             if (!stand.hasBoundPlayer())
                 stand.setBoundPlayer(player.getUUID());
             else if (stand.getBoundPlayer().equals(player.getUUID()))
@@ -92,5 +95,12 @@ public class VivecraftPlayerStandBlock extends BaseEntityBlock {
     @Override
     public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return Blocks.LECTERN.getShape(Blocks.LECTERN.defaultBlockState().setValue(FACING, blockState.getValue(FACING)), blockGetter, blockPos, collisionContext);
+    }
+
+    private boolean isPlayerInVR(boolean isClientside, Player player) {
+        if (isClientside)
+            return VRPlayersClient.getInstance().isVRPlayer(player);
+        else
+            return ServerVRPlayers.isVRPlayer((ServerPlayer) player);
     }
 }

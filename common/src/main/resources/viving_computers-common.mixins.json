@@ -6,7 +6,8 @@
   "client": [
   ],
   "mixins": [
-    "MixinLecternBlock"
+    "MixinLecternBlock",
+    "MixinKeyButton"
   ],
   "injectors": {
     "defaultRequire": 1

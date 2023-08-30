@@ -6,6 +6,7 @@ import io.github.techtastic.viving_computers.block.VCBlockEntities;
 import io.github.techtastic.viving_computers.block.VCBlocks;
 import io.github.techtastic.viving_computers.block.entity.renderer.VivecraftPlayerStandBER;
 import io.github.techtastic.viving_computers.integration.cc.VivingComputersPeripheralRegistry;
+import io.github.techtastic.viving_computers.network.VCNetworking;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 
@@ -19,6 +20,8 @@ public class VivingComputersMod {
     public static void init() {
         VCBlocks.registerBlocks();
         VCBlockEntities.registerBlockEntities();
+
+        VCNetworking.register();
 
         VivingComputersPeripheralRegistry.registerPeripherals();
     }
