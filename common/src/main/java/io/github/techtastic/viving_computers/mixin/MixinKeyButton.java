@@ -8,18 +8,15 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.vivecraft.client_vr.gui.PhysicalKeyboard.KeyButton;
+import org.vivecraft.client_vr.gui.PhysicalKeyboard;
 import org.vivecraft.client_vr.provider.ControllerType;
 
-@Mixin(KeyButton.class)
+@Mixin(targets = "org/vivecraft/client_vr/gui/PhysicalKeyboard$KeyButton")
 public class MixinKeyButton {
     @Shadow @Final public int id;
     @Unique
@@ -36,7 +33,7 @@ public class MixinKeyButton {
         return instance.getSoundManager();
     }
 
-    @Inject(method = "press", at = @At("TAIL"))
+    @Inject(method = "press", at = @At("TAIL"), remap = false)
     private void vc$throwKeyboardEvent (ControllerType controller,boolean isRepeat, CallbackInfo ci){
         ClientLevel level = mc.level;
         LocalPlayer player = mc.player;

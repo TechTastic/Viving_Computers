@@ -45,7 +45,10 @@ public class VivecraftPlayerStandBlock extends BaseEntityBlock {
         BlockEntity be = level.getBlockEntity(blockPos);
         boolean emptyHand = player.getItemInHand(interactionHand).isEmpty();
 
-        if (be instanceof VivecraftPlayerStandBE stand && emptyHand && isPlayerInVR(level.isClientSide, player)) {
+        if (!(be instanceof VivecraftPlayerStandBE stand))
+            return InteractionResult.FAIL;
+
+        if (emptyHand && isPlayerInVR(level.isClientSide, player)) {
             if (!stand.hasBoundPlayer())
                 stand.setBoundPlayer(player.getUUID());
             else if (stand.getBoundPlayer().equals(player.getUUID()))
@@ -53,7 +56,7 @@ public class VivecraftPlayerStandBlock extends BaseEntityBlock {
             else
                 return InteractionResult.sidedSuccess(level.isClientSide);
             return InteractionResult.SUCCESS;
-        } else if (be instanceof VivecraftPlayerStandBE stand) {
+        } else {
             ItemStack stack = player.getItemInHand(interactionHand);
             if (stack.getItem() instanceof DyeItem dye) {
                 int color = dye.getDyeColor().getTextColor();
